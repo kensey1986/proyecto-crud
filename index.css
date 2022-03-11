@@ -14,8 +14,18 @@ body div span {
     font-size: 10px;
     padding: 2px;
 }
-
-.fondo{
-    background: red;
+.editando{
+    background: gray;
 }
+.editando2{
+    background: none;
+}
+.btnAction1{
+    display: none;
+}
+
+.btnAction2{
+    display: inline-block;
+}
+
 
