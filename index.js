@@ -1,5 +1,4 @@
-
-const clientes = [
+let clientes = [
     {
         id: 1,
         nombre: "pepe",
@@ -43,9 +42,6 @@ function list(data) {
     });
     const nodoPadreListadohijos = document.getElementById("list");
 
-    console.log('====================================');
-    console.log(nodoPadreListadohijos.childNodes.length);
-    console.log('====================================');
 
 }
 
@@ -73,14 +69,10 @@ function addClient() {
         })
 
         let nuevoNodo = document.createElement("li");
-        nuevoNodo.innerHTML = `${inputNombres.value} ${inputApellidos.value}  ${inputCelular.valueAsNumber} - <button  name=${id} onclick="editItem(${id})">Editar</button> - <button name=${id} onclick="deleteItem(${id})">Eliminar</button>`;
+        nuevoNodo.innerHTML = `${inputNombres.value} - ${inputApellidos.value} - ${inputCelular.valueAsNumber} - <button  name=${id} onclick="editItem(${id})">Editar</button> - <button name=${id} onclick="deleteItem(${id})">Eliminar</button>`;
         nuevoNodo.setAttribute("id", `${id}`)
         document.getElementById('list').appendChild(nuevoNodo);
-        inputNombres.value = '';
-        inputApellidos.value = '';
-        inputCelular.value = '';
-        document.getElementById("error").innerHTML = '';
-        document.getElementById("error").setAttribute("class", "");
+        cleanBox();
     }
 }
 
@@ -131,6 +123,18 @@ function deleteItem(id) {
     const item = document.getElementById(`${id}`);
 
     nodoPadre.removeChild(item);
+
+    clientes = clientes.filter( item => item.id !== id)
+
+    console.log('====================================');
+    console.log(clientes);
+    console.log('====================================');
+    // console.log('==============borrando======================');
+    // console.log(clientes);
+    // console.log('====================================');
+    // // eliminar el archivo  item desde el array clientes
+
+    
 }
 
 
@@ -138,20 +142,12 @@ function deleteItem(id) {
 function editItem(id) {
     let data = document.getElementById(`${id}`);
     data.setAttribute("class", "editando")
-    
     let btns = document.getElementsByName(`${id}`);
-
-    
     btns[0].setAttribute("disabled", "true")
     btns[1].setAttribute("disabled", "true")
-
     let cliente = data.textContent;
-    
     cliente = cliente.split(' - ', 3);
 
-    console.log('====================================');
-    console.log(cliente);
-    console.log('====================================');
     
     // aqui seteo o envio los datos seleccionados a mis input
     let inputNombres = document.getElementById("nombres");
@@ -172,22 +168,68 @@ function editItem(id) {
     btnUpdate.setAttribute("type", "button")
     btnUpdate.textContent= 'Actualizar';
     btnUpdate.setAttribute("onclick", `updateClient(${id})`)
-    
     document.getElementById('form').appendChild(btnUpdate);
-
-
+    
+    //crea boton nuevo para cancelar
+    let btnCancelar = document.createElement("button");
+    btnCancelar.setAttribute("type", "button")
+    btnCancelar.textContent= 'Cancelar';
+    btnCancelar.setAttribute("onclick", `cleanBox()`)
+    document.getElementById('form').appendChild(btnCancelar);
 }
 
 function updateClient (id){
-  console.log(id);
   let dataCliente = document.getElementById(`${id}`)
   let inputNombres = document.getElementById("nombres");
   let inputApellidos = document.getElementById("apellidos");
   let inputCelular = document.getElementById("celular");
-  console.log('============dataCliente========================');
-  console.log(dataCliente);
-  console.log('====================================');
+  
   dataCliente.innerHTML = `${inputNombres.value} ${inputApellidos.value}  ${inputCelular.valueAsNumber} - <button  name=${id} onclick="editItem(${id})">Editar</button> - <button name=${id} onclick="deleteItem(${id})">Eliminar</button>`;
   dataCliente.setAttribute("id", `${id}`)
   dataCliente.setAttribute("class","")
+
+
+  // debemos valdiar los datos ya que llegan solo values
+   
+    // actualizamos el cliente en el array
+    clientes[`${id}`].nombre = inputNombres.value;
+    clientes[`${id}`].apellido = inputApellidos.value
+    clientes[`${id}`].celular = inputCelular.valueAsNumber
+
+}
+
+
+function cleanBox(){
+    let inputNombres = document.getElementById("nombres");
+    let inputApellidos = document.getElementById("apellidos");
+    let inputCelular = document.getElementById("celular");
+    inputNombres.value = '';
+    inputApellidos.value = '';
+    inputCelular.value = '';
+    document.getElementById("error").innerHTML = '';
+    document.getElementById("error").setAttribute("class", "");
+
+}
+
+function searchClient(value) {
+    // const inputSearchText = document.getElementById(searchText);
+    console.log(value);
+    const nuevos = clientes.filter( item => (item.nombre == value));
+    console.log('====================================');
+    console.log(nuevos);
+    console.log('====================================');
+    list(nuevos);
+
+    // let nodoPadre = document.getElementById("list");
+
+    // const item = document.getElementById(`${id}`);
+
+    // nodoPadre.removeChild(item);
+
+    // const inputSearchInput = document.getElementById(searchNum);
+
+    // if (inputSearchText.value) {
+        
+    // }
+
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,25 +8,40 @@
     <title>Document</title>
     <link rel="stylesheet" href="index.css">
 </head>
+
 <body>
     <div>
+        <div>
+            <form id="formSearch" action="">
+                <label for="searchText"> <strong>Buscar por Nombre</strong> </label>
+                <input id="searchText" type="text" onchange="searchClient(this.value)">
+                <label for="searchNum"> <strong>Buscar por ID</strong> </label>
+                <input id="searchNum" type="text">
+                <button id="btnSearch" onclick="searchClient()" type="button">
+                    Buscar
+                </button>
+    
+            </form>
+            <span id="errorSearch"></span>
+        </div>
         <form id="form" action="">
             <label for="nombres"> <strong>Nombres</strong> </label>
-            <input  id="nombres" type="text">
+            <input id="nombres" type="text">
             <label for="apellidos"> <strong>Apellidos</strong> </label>
-            <input  id="apellidos" type="text">
+            <input id="apellidos" type="text">
             <label for="celular"> <strong>Celular</strong> </label>
-            <input  id="celular" type="number">
-            <button id="btnAdd" onclick="addClient()" type="button" >
+            <input id="celular" type="number">
+            <button id="btnAdd" onclick="addClient()" type="button">
                 Ingresar
             </button>
-           
+
         </form>
         <span id="error"></span>
     </div>
-    <div >
+    <div>
         <ul id="list"></ul>
     </div>
     <script src="/index.js"></script>
 </body>
+
 </html>
