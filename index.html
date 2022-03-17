@@ -17,7 +17,7 @@
     <div class="container">
 
         <div>
-            <h1>Empleados</h1>
+            <h1>Pokemon List</h1>
             <hr>
             <div class="row" id="items">
 
@@ -27,53 +27,23 @@
         </div>
 
         
+        <div class="row">
         <template id="teamplate-card">
-            
-            <div class="card" style="width: 40rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h4 class="card-title">Nombre:</h4>
-                    <h5 >un nombre	</h5>
-                    <h4 class="card-title">Apellidos:</h4>
-                    <h5 class="username">un nombre	</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-dark">Go somewhere</a>
-                </div>
+            <!-- <div class="card me-3 ms-3 mb-3" style="width: 18rem;"> -->
+                    <div class="col-4">
+                        <div class="card" style="width: 18rem;">
+                            <img src="..." class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                </template>
             </div>
-        </template>
     </div>
-        <!-- 
-    <div>
-        <div>
-            <form id="formSearch" action="">
-                <label for="searchText"> <strong>Buscar por Nombre</strong> </label>
-                <input id="searchText" type="text" onchange="searchClient(this.value)">
-                <label for="searchNum"> <strong>Buscar por ID</strong> </label>
-                <input id="searchNum" type="text">
-                <button id="btnSearch" onclick="searchClient()" type="button">
-                    Buscar
-                </button>
-    
-            </form>
-            <span id="errorSearch"></span>
-        </div>
-        <form id="form" action="">
-            <label for="nombres"> <strong>Nombres</strong> </label>
-            <input id="nombres" type="text">
-            <label for="apellidos"> <strong>Apellidos</strong> </label>
-            <input id="apellidos" type="text">
-            <label for="celular"> <strong>Celular</strong> </label>
-            <input id="celular" type="number">
-            <button id="btnAdd" onclick="addClient()" type="button">
-                Ingresar
-            </button>
-
-        </form>
-        <span id="error"></span>
-    </div>
-    <div>
-        <ul id="list"></ul>
-    </div> -->
+ 
     <script src="/app.js" type="module"></script>
 </body>
 

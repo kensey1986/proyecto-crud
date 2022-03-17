@@ -10,10 +10,10 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchData();
 })
 
-items.addEventListener('click', e => {
-    addCliente(e);
+// items.addEventListener('click', e => {
+//     addCliente(e);
 
-})
+// })
 
 
 
@@ -21,25 +21,56 @@ items.addEventListener('click', e => {
 const fetchData = async () => {
 
     try {
-        const res = await fetch('api.json')
+        const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=12&offset00')
+
+        // console.log(res);
+
         const data = await res.json()
-       
-        pintarCards(data);
+
+        // console.log(data.results);
+        const resultados = data.results;
+        // console.log(resultados);
+        const pokemonDataList = [];
+        for await (const pokemon of resultados){
+            const detailPokemon = await getDetailPokemonsByUrl(pokemon.url);
+            // console.log(detailPokemon);
+           pokemonDataList.push({
+               id: detailPokemon.id,
+               name: detailPokemon.name,
+               type: detailPokemon.types[0].type.name,
+               order: detailPokemon.order,
+               image: detailPokemon.sprites.other['official-artwork'].front_default
+           })
+        }
+        // console.log(pokemonDataList);
+           pintarCards(pokemonDataList);
+    //    console.log(data.results);
     } catch (error) {
         console.error(error);
     }
 }
 
+const getDetailPokemonsByUrl = async (urlDinamic) => {
+    // console.log(urlDinamic);
+    try {
+        const res = await fetch(`${urlDinamic}`);
+     
 
+        const data = await res.json();
+        return data;
+    } catch (error) {
+       console.error(error); 
+    }
+}
 
 // dibuja mis cards
 const pintarCards = data =>{
     data.forEach(element => {
-        console.log(element.username);
         templateCard.querySelector('h5').textContent = element.name;
-        templateCard.querySelector('.username').textContent = element.username;
-        templateCard.querySelector('.btn-dark').dataset.id =element.id
-        // console.log(templateCard);
+        templateCard.querySelector('img').setAttribute("src", `${element.image}`);
+        templateCard.querySelector('p').innerHTML = `<strong> Tipo:</strong> ${element.type}`;
+        // templateCard.querySelector('p').textContent = `Tipo: ${element.type}`;
+         // templateCard.querySelector('.btn-dark').dataset.id =element.id
         const clone  = templateCard.cloneNode(true);
         fragment.appendChild(clone);
     });
