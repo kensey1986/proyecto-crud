@@ -7,7 +7,7 @@ const templateCard = document.getElementById('teamplate-card').content;
 const fragment = document.createDocumentFragment();
 
 document.addEventListener('DOMContentLoaded', () => {
-    fetchData();
+    fetchData('00');
 })
 
 // items.addEventListener('click', e => {
@@ -15,14 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // })
 
-
-
 //hace el llamado a una api externar
-const fetchData = async () => {
-
-    try {
-        const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=12&offset00')
-
+const fetchData = async (offset) => {
+    
+    try {                                                                              
+        const res = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=12&offset=${offset}`)
         // console.log(res);
 
         const data = await res.json()
@@ -48,6 +45,8 @@ const fetchData = async () => {
     } catch (error) {
         console.error(error);
     }
+
+    
 }
 
 const getDetailPokemonsByUrl = async (urlDinamic) => {
@@ -69,7 +68,7 @@ const pintarCards = data =>{
         templateCard.querySelector('h5').textContent = element.name;
         templateCard.querySelector('img').setAttribute("src", `${element.image}`);
         templateCard.querySelector('p').innerHTML = `<strong> Tipo:</strong> ${element.type}`;
-        // templateCard.querySelector('p').textContent = `Tipo: ${element.type}`;
+        templateCard.querySelector('a').setAttribute("href", `./pages/detalles.html?id=${element.id}`);
          // templateCard.querySelector('.btn-dark').dataset.id =element.id
         const clone  = templateCard.cloneNode(true);
         fragment.appendChild(clone);
@@ -80,7 +79,13 @@ const pintarCards = data =>{
 
 
 
-const addCliente = e => {
-    console.log(e.target);
-    console.log(e.target.classList.contains('btn-dark'));
+
+const paginacion = (offset) =>{
+    fetchData(offset);
+    
+    console.log(items);
+//    const bn1= document.getElementById('antes').addEventListener("click", fetchData('12'));
+//    console.log("🚀 ~ file: app.js ~ line 84 ~ paginacion ~ bn1", bn1)
+
 }
+
