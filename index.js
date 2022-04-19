@@ -1,6 +1,4 @@
-
-const clientes = [
-    {
+const clientes = [{
         id: 1,
         nombre: "pepe",
         apellido: "perez",
@@ -10,64 +8,73 @@ const clientes = [
         id: 2,
         nombre: "maria",
         apellido: "paez",
-        celular:    546465465,
+        celular: 546465465,
     },
     {
         id: 3,
         nombre: "sofia",
         apellido: "ramirez",
-        celular:    5454564,
+        celular: 5454564,
     },
     {
         id: 4,
         nombre: "pablito",
         apellido: "casas",
-        celular:  555555,
+        celular: 555555,
+    },
+    {
+        id: 6,
+        nombre: "pedrito",
+        apellido: "torres",
+        celular: 555555,
     }
 ]
 
-function list (data) {
+function list(clientes) {
     let nuevoNodo;
     let botonEliminar
-    data.forEach(element => {
+    clientes.forEach(element => {
         nuevoNodo = document.createElement("li");
-        nuevoNodo.innerHTML= `${element.nombre}  ${element.apellido} --**- ${element.celular} <button id=${element.id} onclick="deleteItem(${element.id})">Eliminar</button>`;
+        nuevoNodo.innerHTML = `Nombre: ${element.nombre}  Apellido: ${element.apellido} // ${element.celular} <button id=${element.id} onclick=" deleteProduct(${element.id}) "> Eliminar </button>`;
         document.getElementById('list').appendChild(nuevoNodo);
-     
+
     });
 }
 
-list (clientes);
+list(clientes);
 
 // agrego clientes
 
-function addClient(){
+function addClient() {
+    /**
+     * capturo los nodos para luego acceder a los datos que me envia el usuario
+     */
     let inputNombres = document.getElementById("nombres");
     let inputApellidos = document.getElementById("apellidos");
     let inputCelular = document.getElementById("celular");
     // const estado = true;
 
-    const resp = validateData([ inputNombres, inputApellidos, inputCelular ]);
-    if(!resp){
+    const resp = validateData([inputNombres, inputApellidos, inputCelular]);
+    if (!resp) {
         clientes.push({
             nombre: inputNombres.value,
             apellido: inputApellidos.value,
         })
         let nuevoNodo = document.createElement("li");
-        nuevoNodo.innerHTML= `${inputNombres.value} ${inputApellidos.value} - ${inputCelular.valueAsNumber}`;
+        nuevoNodo.innerHTML = `${inputNombres.value} ${inputApellidos.value} - ${inputCelular.valueAsNumber}`;
         document.getElementById('list').appendChild(nuevoNodo);
-        
-        inputNombres.value ='';
-        inputApellidos.value ='';
-        inputCelular.value='';
-        document.getElementById("error").textContent= '';
+
+        inputNombres.value = '';
+        inputApellidos.value = '';
+        inputCelular.value = '';
+        document.getElementById("error").textContent = '';
         document.getElementById("error").setAttribute("class", "");
 
     }
-   
+
 }
 
-function validateData(data){
+function validateData(data) {
     console.log('====================================');
     console.log(data);
     console.log('====================================');
@@ -76,30 +83,28 @@ function validateData(data){
     const textError = document.getElementById("error");
     const resp = false;
     data.forEach(element => {
-        
         if (element.type === 'text') {
             if (element.value.match(tieneNumero) || element.value === '') {
-                textError.setAttribute("class", "fondo" );
-                textError.textContent= 'No se permiten numeros en los nombres y apellidos - Tampoco campos vacios';
-                resp= true;
+                textError.setAttribute("class", "fondo");
+                textError.textContent = 'No se permiten numeros en los nombres y apellidos - Tampoco campos vacios';
+                resp = true;
             }
-            
         }
         if (element.type === 'number') {
-            if (element.value.match(tieneLetras) || element.value === '' ) {
-                textError.setAttribute("class", "fondo" );
-                textError.textContent= 'No se permiten letras ni simbolos en el numero telefonico - Tampoco puede estar vacio';
-                resp= true;
+            if (element.value.match(tieneLetras) || element.value === '') {
+                textError.setAttribute("class", "fondo");
+                textError.textContent = 'No se permiten letras ni simbolos en el numero telefonico - Tampoco puede estar vacio';
+                resp = true;
             }
-           
+
         }
-        
+
     });
 }
 
-function deleteItem (dato) { 
-     console.log('==============trae======================');
-     console.log(dato);
+function deleteProduct(dato) {
+    console.log('==============trae id======================');
+    console.log(dato);
     console.log('====================================');
 
 }
