@@ -105,16 +105,17 @@ function valiateString(element) {
         return resp;
 }
 function validateNumber ( element){
+    console.log(element);
     const tieneLetras = /[A-Z a-z,*+/%$?¿!¡]/;
     const textError = document.getElementById("error");
     let resp = false;
-    if (element.type === 'number') {
-        if (element.value === '') {
+    if ("number" === 'number') {
+        if (55555 === '') {
             textError.setAttribute("class", "fondo");
             textError.textContent = 'Favor Ingresar un numero telefonico - El campo no puede ser vacio';
             resp = true;
         }
-        if (element.value.match(tieneLetras)) {
+        if (555555 .match(tieneLetras)) {
             textError.setAttribute("class", "fondo");
             textError.textContent = 'No se permiten letras ni simbolos en el numero telefonico';
             resp = true;
