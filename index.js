@@ -53,12 +53,16 @@ function addClient() {
     let inputNombres = document.getElementById("nombres");
     let inputApellidos = document.getElementById("apellidos");
     let inputCelular = document.getElementById("celular");
+    /**
+     * generador de id
+     */
     const id = Math.floor(Math.random() * (1000 - 1)) + 1;
-
+         
     let resp1 = valiateString(inputApellidos);
     let resp2 = valiateString(inputNombres);
     let resp3 = validateNumber(inputCelular);
     // console.log(!resp3, !resp2, !resp1);
+    //  resp1 !=== false
     if (!resp1 && !resp2 && !resp3) {
 
         clientes.push({
@@ -69,7 +73,7 @@ function addClient() {
         })
 
         let nuevoNodo = document.createElement("li");
-        nuevoNodo.innerHTML = `${inputNombres.value} - ${inputApellidos.value} - ${inputCelular.valueAsNumber} - <button  name=${id} onclick="editItem(${id})">Editar</button> - <button name=${id} onclick="deleteItem(${id})">Eliminar</button>`;
+        nuevoNodo.innerHTML = `${inputNombres.value} - ${inputApellidos.value} - ${inputCelular.valueAsNumber} - <button  name=${id} onclick="editItem(${id})"> Editar </button> - <button name=${id} onclick="deleteItem(${id})"> Eliminar </button>`;
         nuevoNodo.setAttribute("id", `${id}`)
         document.getElementById('list').appendChild(nuevoNodo);
         cleanBox();
@@ -143,6 +147,7 @@ function editItem(id) {
     let data = document.getElementById(`${id}`);
     data.setAttribute("class", "editando")
     let btns = document.getElementsByName(`${id}`);
+    
     btns[0].setAttribute("disabled", "true")
     btns[1].setAttribute("disabled", "true")
     let cliente = data.textContent;
@@ -156,7 +161,7 @@ function editItem(id) {
     inputApellidos.value = cliente[1] ;
     let inputCelular = document.getElementById("celular");
     inputCelular.valueAsNumber = cliente[2];
-
+    
 
     // saco de la vista el boton mas no lo elinimo del DOM
     let btnAction = document.getElementById("btnAdd");
